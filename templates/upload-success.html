@@ -1,12 +1,23 @@
 <!doctype html>
-<title>Hello from Flask</title>
-{% if filename %}
-  <h1>File successfully uploaded!</h1>
-  <h4>{{ filename }}</h4>
-{% else %}
-  <h1>Oops!</h1>
-{% endif %}
+<title>Results</title>
 
 {% if text %}
+  <h1>Sinhala Contents in the image</h1>
+
+  {% if filename %}
+    <h4>{{ filename }}</h4>
+  {% endif %}
+
   <pre>{{text}}</pre>
+
+{% else %}
+  <h1>Oops! Cannot read any Sinhala characters</h1>
 {% endif %}
+
+
+<button onclick="gotohome()">Try again</button>
+<script>
+  function gotohome(){
+    location.reload(true);
+  };
+</script>

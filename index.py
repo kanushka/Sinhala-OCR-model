@@ -6,6 +6,8 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from logging.config import dictConfig
 
+import sinhalaocr
+
 UPLOAD_FOLDER = '\\uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -52,7 +54,7 @@ def upload_file():
             app.logger.info('%s file uploaded successfully', filename)
 
             # get sinhala text form uploaded image
-
-            return render_template('upload-success.html', filename=filename)
+            text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
+            return render_template('upload-success.html', filename=filename, text=text)
 
     return render_template('upload.html')

@@ -1,13 +1,10 @@
 # @author: BLK Gayan
 # @purpose: Read Sinhala characters in a image/photo
 
-# import the necessary packages
 from PIL import Image
 import pytesseract
-import argparse
 import cv2
 import os
-import numpy as np
 
 def convert_to_sinhala_text(filepath, scale=80):
 	# load the example image and convert it to grayscale
@@ -34,7 +31,7 @@ def convert_to_sinhala_text(filepath, scale=80):
 	cv2.imwrite(filename, gray)
 
 	# load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-	text = pytesseract.image_to_string(Image.open(filename), lang='sin')
+	text = pytesseract.image_to_string(Image.open(filename), lang='eng+sin')
 	os.remove(filename)
 
 	return text
