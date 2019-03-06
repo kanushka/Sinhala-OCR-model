@@ -1,9 +1,29 @@
+# @author: BLK Gayan
+# @purpose: Upload file for recognize Sinhala text and give basic WEb view
+
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+from logging.config import dictConfig
 
 UPLOAD_FOLDER = '\\uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -12,7 +32,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -29,7 +49,10 @@ def upload_file():
             filename = secure_filename(file.filename)
             # file.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
             file.save('uploads/' + filename)
-            # return redirect(url_for('uploaded_file', filename=filename))
-            return render_template('hello.html', filename=filename)
+            app.logger.info('%s file uploaded successfully', filename)
+
+            # get sinhala text form uploaded image
+
+            return render_template('upload-success.html', filename=filename)
 
     return render_template('upload.html')
