@@ -1,0 +1,8 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% if filename %}
+  <h1>File successfully uploaded!</h1>
+  <h4>{{ filename }}</h4>
+{% else %}
+  <h1>Oops!</h1>
+{% endif %}
