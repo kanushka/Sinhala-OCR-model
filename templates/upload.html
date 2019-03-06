@@ -1,7 +1,20 @@
 <!doctype html>
 <title>Upload File</title>
 <h1>Upload a image file with Sinhala characters</h1>
-<form method=post enctype=multipart/form-data>
-  <input type=file name=file>
-  <input type=submit value='Upload & Process'>
+<form method=post enctype=multipart/form-data> 
+  <input id="imagefile" type=file name=file>
+  <input id="submitbtn" type=submit value='Upload & Process' hidden>
 </form>
+<h3 id="loadingtext" hidden>Loading...</h3>
+
+<script type="text/javascript">
+  document.getElementById('imagefile').onchange = function () {
+    if(this.value){
+      document.getElementById("submitbtn").hidden = false;
+    }
+  };
+
+  document.getElementById("submitbtn").onclick = function () {
+    document.getElementById("loadingtext").hidden = false;
+  }
+</script>
