@@ -4,4 +4,3 @@ opencv-python
 pytesseract
 GoogleAppEngineCloudStorageClient
 cloudstorage
-google
