@@ -15,9 +15,10 @@
 {% endif %}
 
 
-<button onclick="gotohome()">Try again</button>
+<button id="trybtn">Try another image</button>
+
 <script>
-  function gotohome(){
-    location.reload(true);
-  };
+  document.getElementById("trybtn").onclick = function () {
+    window.location.replace(window.location.href);
+  }
 </script>

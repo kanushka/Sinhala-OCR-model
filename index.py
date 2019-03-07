@@ -42,6 +42,7 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+        
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
@@ -55,6 +56,11 @@ def upload_file():
 
             # get sinhala text form uploaded image
             text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
+
+            # remove file
+            os.remove('uploads/' + filename)
+            app.logger.info('%s file removed', filename)
+
             return render_template('upload-success.html', filename=filename, text=text)
 
     return render_template('upload.html')

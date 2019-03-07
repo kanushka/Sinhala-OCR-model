@@ -1,20 +1,33 @@
 <!doctype html>
 <title>Upload File</title>
 <h1>Upload a image file with Sinhala characters</h1>
-<form method=post enctype=multipart/form-data> 
-  <input id="imagefile" type=file name=file>
+<form method=post enctype=multipart/form-data> <input id="imagefile" type=file name=file>
+  <img id="imageprev" src="#" alt="#" hidden/>
   <input id="submitbtn" type=submit value='Upload & Process' hidden>
 </form>
 <h3 id="loadingtext" hidden>Loading...</h3>
 
 <script type="text/javascript">
-  document.getElementById('imagefile').onchange = function () {
-    if(this.value){
+  let imagefile = document.getElementById('imagefile');
+  let imageprev = document.getElementById("imageprev");
+  let submitbtn = document.getElementById("submitbtn");
+
+  imagefile.onchange = function () {
+    if (this.value) {
       document.getElementById("submitbtn").hidden = false;
+      console.log('loaded image :', this.value);
+
+      let reader = new FileReader();
+
+      reader.onload = function (e) {
+        imageprev.src = e.target.result;
+        imageprev.hidden = false;
+      };
+      reader.readAsDataURL(imagefile.files[0]);
     }
   };
 
-  document.getElementById("submitbtn").onclick = function () {
+  submitbtn.onclick = function () {
     document.getElementById("loadingtext").hidden = false;
   }
 </script>
