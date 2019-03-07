@@ -3,7 +3,6 @@
 
 import os
 import cloudstorage as gcs
-import webapp2
 
 from google.appengine.api import app_identity
 from flask import Flask, flash, request, redirect, url_for, render_template
@@ -54,16 +53,16 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            # file.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
-            file.save('uploads/' + filename)
+            # save copy of the file
+            create_file('uploads/' + filename)
             app.logger.info('%s file uploaded successfully', filename)
             app.logger.info(file)
 
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
+            text = sinhalaocr.convert_to_sinhala_text(read_file('uploads/' + filename))
 
             # remove file
-            os.remove('uploads/' + filename)
+            delete_files('uploads/' + filename)
             app.logger.info('%s file removed', filename)
 
             return render_template('upload-success.html', filename=filename, text=text)
