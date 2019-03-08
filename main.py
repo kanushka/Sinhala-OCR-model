@@ -80,7 +80,7 @@ def upload_file():
             publicpath = 'https://storage.googleapis.com/' + bucket_name + '/uploads/' + filename
 
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text(publicpath)
+            text = sinhalaocr.convert_to_sinhala_text('https://storage.googleapis.com/sinhala-ocr-bucket/uploads/1.JPG')
             # text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
 
             # remove file
