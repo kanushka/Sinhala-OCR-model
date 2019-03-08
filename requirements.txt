@@ -3,4 +3,4 @@ Pillow
 opencv-python
 pytesseract
 GoogleAppEngineCloudStorageClient
-cloudstorage
+google-cloud-storage
