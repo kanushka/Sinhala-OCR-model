@@ -18,7 +18,7 @@ def convert_to_sinhala_text(filepath, scale=80):
 	# resized_image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
 
 	# grayscale image
-	gray = cv2.cvtColor(resized_image, cv2.COLOR_BGR2GRAY)
+	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 	# check to see if we should apply thresholding to preprocess the image
 	gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]		
