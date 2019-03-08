@@ -64,6 +64,16 @@ def upload_file():
             # file.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
             file.save('uploads/' + filename)
             app.logger.info('%s file uploaded successfully', filename)
+            
+            # save in gcloud bucket
+            destination_blob_name = 'uploads/' + filename
+            source_file_name = 'uploads/' + filename
+
+            blob = bucket.blob(destination_blob_name)
+            blob.upload_from_filename(source_file_name)
+            print('File {} uploaded to {}.'.format(
+                source_file_name,
+                destination_blob_name))
 
             # get sinhala text form uploaded image
             text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
