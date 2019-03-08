@@ -75,7 +75,7 @@ def upload_file():
                 destination_blob_name))
 
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text(blob.download_to_filename(destination_file_name))
+            text = sinhalaocr.convert_to_sinhala_text(blob.download_to_filename(filename))
             # text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
 
             # remove file
@@ -83,7 +83,6 @@ def upload_file():
             app.logger.info('%s file removed', filename)
 
             # remove file in gcloud
-            blob = bucket.blob(destination_blob_name)
             blob.delete()
             print('Blob {} deleted.'.format(destination_blob_name))
 
