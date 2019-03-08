@@ -74,11 +74,13 @@ def upload_file():
                 source_file_name,
                 destination_blob_name))
 
-            print('Blob get {}', blob.make_public())
-            print('Blob get {}', blob.path)
+            blob.make_public()
+
+            # public image path
+            publicpath = 'https://storage.googleapis.com/' + bucket_name + '/uploads/' + filename
 
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text(blob.path)
+            text = sinhalaocr.convert_to_sinhala_text(publicpath)
             # text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
 
             # remove file
