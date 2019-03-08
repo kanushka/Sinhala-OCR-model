@@ -79,6 +79,7 @@ def upload_file():
 
             # public image path
             publicpath = 'https://storage.googleapis.com/' + bucket_name + '/uploads/' + filename
+            print('public path of uploaded image {}', publicpath)
 
             # get sinhala text form uploaded image
             # text = sinhalaocr.convert_to_sinhala_text(publicpath)
@@ -89,8 +90,8 @@ def upload_file():
             app.logger.info('%s file removed', filename)
 
             # remove file in gcloud
-            blob.delete()
-            print('Blob {} deleted.'.format(destination_blob_name))
+            # blob.delete()
+            # print('Blob {} deleted.'.format(destination_blob_name))
 
             return render_template('upload-success.html', filename=filename, text=text)
 
