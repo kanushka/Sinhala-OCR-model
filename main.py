@@ -37,7 +37,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 storage_client = storage.Client()
 
 # The name for the new bucket
-bucket_name = 'gayan-new-bucket'
+bucket_name = 'sinhala-ocr-bucket'
 bucket = storage_client.get_bucket(bucket_name)
 print('Bucket {} selected.'.format(bucket.name))
 
@@ -84,8 +84,8 @@ def upload_file():
             app.logger.info('%s file removed', filename)
 
             # remove file in gcloud
-            blob.delete()
-            print('Blob {} deleted.'.format(destination_blob_name))
+            # blob.delete()
+            # print('Blob {} deleted.'.format(destination_blob_name))
 
             return render_template('upload-success.html', filename=filename, text=text)
 
