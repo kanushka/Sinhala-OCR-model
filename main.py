@@ -68,15 +68,15 @@ def upload_file():
             # save in gcloud bucket
             destination_blob_name = 'uploads/' + filename
             source_file_name = 'uploads/' + filename
-
             blob = bucket.blob(destination_blob_name)
             blob.upload_from_filename(source_file_name)
-            print('File {} uploaded to {}.'.format(
+            print('Blob file {} uploaded to {}.'.format(
                 source_file_name,
                 destination_blob_name))
 
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
+            text = sinhalaocr.convert_to_sinhala_text(blob.download_to_filename(destination_file_name))
+            # text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
 
             # remove file
             os.remove('uploads/' + filename)
