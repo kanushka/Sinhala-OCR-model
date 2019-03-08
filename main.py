@@ -82,6 +82,11 @@ def upload_file():
             os.remove('uploads/' + filename)
             app.logger.info('%s file removed', filename)
 
+            # remove file in gcloud
+            blob = bucket.blob(destination_blob_name)
+            blob.delete()
+            print('Blob {} deleted.'.format(destination_blob_name))
+
             return render_template('upload-success.html', filename=filename, text=text)
 
     return render_template('upload.html')
