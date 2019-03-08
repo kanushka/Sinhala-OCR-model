@@ -37,7 +37,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 storage_client = storage.Client()
 
 # The name for the new bucket
-bucket_name = 'sinhala-ocr-bucket-new'
+bucket_name = 'sinhala-ocr-bucket'
 # bucket = storage_client.create_bucket(bucket_name)
 bucket = storage_client.get_bucket(bucket_name)
 print('Bucket {} selected.'.format(bucket.name))
