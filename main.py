@@ -74,9 +74,9 @@ def upload_file():
                 source_file_name,
                 destination_blob_name))
 
-            print('Blob get {}', blob.get_blob(destination_blob_name))
+            print('Blob get {}', bucket.get_blob(destination_blob_name))
             # get sinhala text form uploaded image
-            text = sinhalaocr.convert_to_sinhala_text(blob.get_blob(destination_blob_name))
+            text = sinhalaocr.convert_to_sinhala_text(bucket.get_blob(destination_blob_name))
             # text = sinhalaocr.convert_to_sinhala_text('uploads/' + filename)
 
             # remove file
